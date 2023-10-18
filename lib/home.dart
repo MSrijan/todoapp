@@ -11,8 +11,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final todoList = ToDo.todoList();
+  final todocontroller = TextEditingController();
 
-  @override
+@override
 Widget build(BuildContext context) {
   return Scaffold(
     backgroundColor: Color.fromARGB(255, 235, 235, 235),
@@ -26,18 +27,58 @@ Widget build(BuildContext context) {
             style: TextStyle(fontSize: 30),
           ),
           for (ToDo todoo in todoList)
-          Todocontainer(todo: todoo,
-          ontodochanged: _handleChange,
-          ondelete: _deletetodo),
+          Todocontainer(
+            todo: todoo,
+            ontodochanged: _handleChange,
+            ondelete: _deletetodo),
        ],
       ),
     ),
-    bottomNavigationBar: Align(
-      alignment:Alignment.bottomRight ),
+    floatingActionButton: FloatingActionButton(
+      backgroundColor: Colors.indigo,
+      child: Icon(Icons.add),
+      onPressed: (){
+        openDialog();
+      }
+      ),
+    drawer: Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            child: Text("Drawer" ,
+            style: TextStyle(fontSize: 30, ))
+            )
+        ],
+      )
+    ),
   );
-  
 }
-void _handleChange(ToDo todo){
+  AppBar buildAppbar() {
+    return AppBar(
+      backgroundColor: Colors.indigo,
+    );
+  }
+
+  Future openDialog() => showDialog(context: context,
+  builder: (context) => AlertDialog(
+    title: Text("Add to list"),
+    content: TextField(
+      autofocus: true,
+      controller: todocontroller,
+      decoration: InputDecoration(hintText: "Add to list"),
+    ),
+    actions: [
+      TextButton(
+        onPressed: (){
+          _addtodoitem(todocontroller.text);
+          
+        }, 
+        child: Text("Add"))
+    ],
+  ));
+
+  void _handleChange(ToDo todo){
   setState((){
     todo.isDone = !todo.isDone;
   });
@@ -47,17 +88,15 @@ void _deletetodo(String id){
   setState(() {
     todoList.removeWhere( (item) => item.id ==id);
   });
-  
 }
 
-  AppBar buildAppbar() {
-    return AppBar(
-      backgroundColor: Colors.indigo,
-      title: Icon(
-        Icons.menu,
-        size: 30,
-        ),
-    );
-  }
+void _addtodoitem(String toDo){
+  setState(() {
+    todoList.add(ToDo(id: DateTime.now().millisecondsSinceEpoch.toString(), todoText: toDo));
+  });
+  Navigator.of(context).pop();
+  todocontroller.clear(); 
 }
+}
+
 
