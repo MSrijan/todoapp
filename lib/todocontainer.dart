@@ -28,26 +28,38 @@ class Todocontainer extends StatelessWidget {
           decoration: todo.isDone? TextDecoration.lineThrough: null,
           ),
         ),
-        trailing: Container(
-          padding: EdgeInsets.all(0),
-          margin: EdgeInsets.symmetric(vertical: 10),
-          width:35,
-          height: 35,
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(25)
-          ),
-          child: Align(
-            alignment: Alignment.center,
-            child:IconButton(
-              color: Colors.white,
-              icon: Icon(Icons.delete),
-              onPressed: (){
-                ondelete(todo.id);
-              },
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey,
+              ),
+              child: IconButton(
+                color: Colors.white,
+                onPressed: () {
+                },
+                icon: Icon(Icons.edit)),
             ),
-          ), 
-          ),
+            const SizedBox(
+                width: 10, // Add the desired spacing between the icons
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.red,
+              ),
+              child: IconButton(
+                color: Colors.white,
+                onPressed: () {
+                  ondelete(todo.id);
+                },
+                icon: Icon(Icons.delete),
+              ),
+            )
+          ],
+        ),
         )
     );
   }
