@@ -5,8 +5,7 @@ class Todocontainer extends StatefulWidget {
   final ToDo todo;
   final ontodochanged;
   final ondelete;
-  final onedit;
-  const Todocontainer({Key? key, required this.todo, required this.ondelete, required this.ontodochanged, required this.onedit, }) : super(key:key);
+  const Todocontainer({Key? key, required this.todo, required this.ondelete, required this.ontodochanged,}) : super(key:key);
 
   @override
   State<Todocontainer> createState() => _TodocontainerState();

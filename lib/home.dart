@@ -62,7 +62,6 @@ Container body() {
           todo: todoo,
           ontodochanged: _handleChange,
           ondelete: _deletetodo,
-          onedit: _onedit,
           ),
 
      ],
@@ -112,12 +111,6 @@ void _addtodoitem(String toDo){
   });
   Navigator.of(context).pop();
   todocontroller.clear(); 
-}
-
-void _onedit(String todo){
-  setState(() {
-    
-  });
 }
 }
 
