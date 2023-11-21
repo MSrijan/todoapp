@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../todocontainer.dart';
 import '../todo.dart';
+import '../account.dart';
 
 class Home extends StatefulWidget {
    Home({super.key});
@@ -65,10 +66,7 @@ List<Widget> get body {
     color: Colors.red,
     child: Text("blue"),
    ),
-   Container(
-    color: Colors.blue,
-    child: Text("Red"),
-   )
+   account_page_body()
 ];
 }
 
@@ -141,19 +139,7 @@ void _addtodoitem(String toDo){
 }
 }
 
-class accountpage extends StatelessWidget {
-  const accountpage({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return NavigationDestination(
-      icon: Icon(Icons.account_circle_rounded),
-      label: "Account"
-      );
-  }
-}
 
 class editpage extends StatelessWidget {
   const editpage({
