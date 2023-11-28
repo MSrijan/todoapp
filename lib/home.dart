@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../todocontainer.dart';
 import '../todo.dart';
 import '../account.dart';
+import '../message.dart';
 
 class Home extends StatefulWidget {
    Home({super.key});
@@ -37,7 +38,7 @@ NavigationBar navbar() {
     selectedIndex: currentpageindex,
     destinations: [
       homepage(),
-      editpage(),
+      messagepage(),
       accountpage(),
     ],
   );
@@ -62,10 +63,7 @@ List<Widget> get body {
       ],
       ),
    ),
-   Container(
-    color: Colors.red,
-    child: Text("blue"),
-   ),
+   message_page_body(),
    account_page_body()
 ];
 }
@@ -137,22 +135,6 @@ void _addtodoitem(String toDo){
   Navigator.of(context).pop();
   todocontroller.clear(); 
 }
-}
-
-
-
-class editpage extends StatelessWidget {
-  const editpage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return NavigationDestination(
-      icon: Icon(Icons.edit),
-      label: "Edit"
-      );
-  }
 }
 
 class homepage extends StatelessWidget {
